@@ -51,7 +51,10 @@
 	STAssertEquals(781, [dg headerSize:0], @"Header size is 781");
 	STAssertEquals(19, [dg appnSize:781], @"Application size is 19");
 	STAssertEquals(8, [dg gceSize:800], @"GCE size is 8");
-	STAssertEquals(29899, [dg imageSize:808], @"Image size is 29899");
+	STAssertEquals(29899, [dg imageSize:808], @"Image 0 size is 29899");
+	STAssertEquals(26999, [dg imageSize:30715], @"Image 1 size is 26999");
+	STAssertEquals(23745, [dg imageSize:57722], @"Image 2 size is 23745");
+	STAssertEquals(33220, [dg imageSize:81475], @"Image 3 size is 33220");
 }
 
 @end
