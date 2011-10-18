@@ -1,0 +1,12 @@
+Byte		Block
+0		Header
+781		Application Extension
+800		Graphic Control Extension
+808		Image Descriptor
+30707		Graphic Control Extension
+30715		Image Descriptor
+57714		Graphic Control Extension
+57722		Image Descriptor
+81467		Graphic Control Extension
+81475		Image Descriptor
+114695		Trailer

@@ -1,0 +1,426 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		839185FD1449FABD000A48DE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 839185FC1449FABD000A48DE /* Foundation.framework */; };
+		839186031449FABD000A48DE /* DecomposeGIF.m in Sources */ = {isa = PBXBuildFile; fileRef = 839186021449FABD000A48DE /* DecomposeGIF.m */; };
+		8391860B1449FABD000A48DE /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8391860A1449FABD000A48DE /* SenTestingKit.framework */; };
+		8391860D1449FABD000A48DE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8391860C1449FABD000A48DE /* UIKit.framework */; };
+		8391860E1449FABD000A48DE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 839185FC1449FABD000A48DE /* Foundation.framework */; };
+		839186101449FABD000A48DE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8391860F1449FABD000A48DE /* CoreGraphics.framework */; };
+		839186131449FABD000A48DE /* libDecomposeGIF.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 839185F91449FABD000A48DE /* libDecomposeGIF.a */; };
+		839186191449FABD000A48DE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 839186171449FABD000A48DE /* InfoPlist.strings */; };
+		8391861B1449FABD000A48DE /* DecomposeGIFTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 8391861A1449FABD000A48DE /* DecomposeGIFTests.h */; };
+		8391861D1449FABD000A48DE /* DecomposeGIFTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8391861C1449FABD000A48DE /* DecomposeGIFTests.m */; };
+		83E0657B144E00B500EAC4C5 /* ByteBits.h in Headers */ = {isa = PBXBuildFile; fileRef = 83E06579144E00B500EAC4C5 /* ByteBits.h */; };
+		83E0657C144E00B500EAC4C5 /* ByteBits.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E0657A144E00B500EAC4C5 /* ByteBits.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		839186111449FABD000A48DE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 839185F01449FABC000A48DE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 839185F81449FABD000A48DE;
+			remoteInfo = DecomposeGIF;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		839185F91449FABD000A48DE /* libDecomposeGIF.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDecomposeGIF.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		839185FC1449FABD000A48DE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		839186001449FABD000A48DE /* DecomposeGIF-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DecomposeGIF-Prefix.pch"; sourceTree = "<group>"; };
+		839186011449FABD000A48DE /* DecomposeGIF.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DecomposeGIF.h; sourceTree = "<group>"; };
+		839186021449FABD000A48DE /* DecomposeGIF.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DecomposeGIF.m; sourceTree = "<group>"; };
+		839186091449FABD000A48DE /* DecomposeGIFTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DecomposeGIFTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8391860A1449FABD000A48DE /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		8391860C1449FABD000A48DE /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		8391860F1449FABD000A48DE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
+		839186161449FABD000A48DE /* DecomposeGIFTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DecomposeGIFTests-Info.plist"; sourceTree = "<group>"; };
+		839186181449FABD000A48DE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		8391861A1449FABD000A48DE /* DecomposeGIFTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DecomposeGIFTests.h; sourceTree = "<group>"; };
+		8391861C1449FABD000A48DE /* DecomposeGIFTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DecomposeGIFTests.m; sourceTree = "<group>"; };
+		83E06579144E00B500EAC4C5 /* ByteBits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ByteBits.h; sourceTree = "<group>"; };
+		83E0657A144E00B500EAC4C5 /* ByteBits.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ByteBits.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		839185F61449FABD000A48DE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				839185FD1449FABD000A48DE /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		839186051449FABD000A48DE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8391860B1449FABD000A48DE /* SenTestingKit.framework in Frameworks */,
+				8391860D1449FABD000A48DE /* UIKit.framework in Frameworks */,
+				8391860E1449FABD000A48DE /* Foundation.framework in Frameworks */,
+				839186101449FABD000A48DE /* CoreGraphics.framework in Frameworks */,
+				839186131449FABD000A48DE /* libDecomposeGIF.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		839185EE1449FABC000A48DE = {
+			isa = PBXGroup;
+			children = (
+				839185FE1449FABD000A48DE /* DecomposeGIF */,
+				839186141449FABD000A48DE /* DecomposeGIFTests */,
+				839185FB1449FABD000A48DE /* Frameworks */,
+				839185FA1449FABD000A48DE /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		839185FA1449FABD000A48DE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				839185F91449FABD000A48DE /* libDecomposeGIF.a */,
+				839186091449FABD000A48DE /* DecomposeGIFTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		839185FB1449FABD000A48DE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				839185FC1449FABD000A48DE /* Foundation.framework */,
+				8391860A1449FABD000A48DE /* SenTestingKit.framework */,
+				8391860C1449FABD000A48DE /* UIKit.framework */,
+				8391860F1449FABD000A48DE /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		839185FE1449FABD000A48DE /* DecomposeGIF */ = {
+			isa = PBXGroup;
+			children = (
+				83E06579144E00B500EAC4C5 /* ByteBits.h */,
+				83E0657A144E00B500EAC4C5 /* ByteBits.m */,
+				839186011449FABD000A48DE /* DecomposeGIF.h */,
+				839186021449FABD000A48DE /* DecomposeGIF.m */,
+				839185FF1449FABD000A48DE /* Supporting Files */,
+			);
+			path = DecomposeGIF;
+			sourceTree = "<group>";
+		};
+		839185FF1449FABD000A48DE /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				839186001449FABD000A48DE /* DecomposeGIF-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		839186141449FABD000A48DE /* DecomposeGIFTests */ = {
+			isa = PBXGroup;
+			children = (
+				8391861A1449FABD000A48DE /* DecomposeGIFTests.h */,
+				8391861C1449FABD000A48DE /* DecomposeGIFTests.m */,
+				839186151449FABD000A48DE /* Supporting Files */,
+			);
+			path = DecomposeGIFTests;
+			sourceTree = "<group>";
+		};
+		839186151449FABD000A48DE /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				839186161449FABD000A48DE /* DecomposeGIFTests-Info.plist */,
+				839186171449FABD000A48DE /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		839185F71449FABD000A48DE /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				83E0657B144E00B500EAC4C5 /* ByteBits.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		839185F81449FABD000A48DE /* DecomposeGIF */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 839186201449FABD000A48DE /* Build configuration list for PBXNativeTarget "DecomposeGIF" */;
+			buildPhases = (
+				839185F51449FABD000A48DE /* Sources */,
+				839185F61449FABD000A48DE /* Frameworks */,
+				839185F71449FABD000A48DE /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DecomposeGIF;
+			productName = DecomposeGIF;
+			productReference = 839185F91449FABD000A48DE /* libDecomposeGIF.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		839186081449FABD000A48DE /* DecomposeGIFTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 839186231449FABD000A48DE /* Build configuration list for PBXNativeTarget "DecomposeGIFTests" */;
+			buildPhases = (
+				839186041449FABD000A48DE /* Sources */,
+				839186051449FABD000A48DE /* Frameworks */,
+				839186061449FABD000A48DE /* Resources */,
+				839186071449FABD000A48DE /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				839186121449FABD000A48DE /* PBXTargetDependency */,
+			);
+			name = DecomposeGIFTests;
+			productName = DecomposeGIFTests;
+			productReference = 839186091449FABD000A48DE /* DecomposeGIFTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		839185F01449FABC000A48DE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
+			buildConfigurationList = 839185F31449FABC000A48DE /* Build configuration list for PBXProject "DecomposeGIF" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 839185EE1449FABC000A48DE;
+			productRefGroup = 839185FA1449FABD000A48DE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				839185F81449FABD000A48DE /* DecomposeGIF */,
+				839186081449FABD000A48DE /* DecomposeGIFTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		839186061449FABD000A48DE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				839186191449FABD000A48DE /* InfoPlist.strings in Resources */,
+				8391861B1449FABD000A48DE /* DecomposeGIFTests.h in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		839186071449FABD000A48DE /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		839185F51449FABD000A48DE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				839186031449FABD000A48DE /* DecomposeGIF.m in Sources */,
+				83E0657C144E00B500EAC4C5 /* ByteBits.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		839186041449FABD000A48DE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8391861D1449FABD000A48DE /* DecomposeGIFTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		839186121449FABD000A48DE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 839185F81449FABD000A48DE /* DecomposeGIF */;
+			targetProxy = 839186111449FABD000A48DE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		839186171449FABD000A48DE /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				839186181449FABD000A48DE /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		8391861E1449FABD000A48DE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8391861F1449FABD000A48DE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		839186211449FABD000A48DE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				DSTROOT = /tmp/DecomposeGIF.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DecomposeGIF/DecomposeGIF-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		839186221449FABD000A48DE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				DSTROOT = /tmp/DecomposeGIF.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DecomposeGIF/DecomposeGIF-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		839186241449FABD000A48DE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DecomposeGIF/DecomposeGIF-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INFOPLIST_FILE = "DecomposeGIFTests/DecomposeGIFTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		839186251449FABD000A48DE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DecomposeGIF/DecomposeGIF-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INFOPLIST_FILE = "DecomposeGIFTests/DecomposeGIFTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		839185F31449FABC000A48DE /* Build configuration list for PBXProject "DecomposeGIF" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8391861E1449FABD000A48DE /* Debug */,
+				8391861F1449FABD000A48DE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		839186201449FABD000A48DE /* Build configuration list for PBXNativeTarget "DecomposeGIF" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				839186211449FABD000A48DE /* Debug */,
+				839186221449FABD000A48DE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		839186231449FABD000A48DE /* Build configuration list for PBXNativeTarget "DecomposeGIFTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				839186241449FABD000A48DE /* Debug */,
+				839186251449FABD000A48DE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 839185F01449FABC000A48DE /* Project object */;
+}
