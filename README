@@ -1,3 +1,13 @@
+What it is:
+- code to extract still images and metadata from GIF animations
+- a port of 'gif-images' from Racket to Objective-C
+- me testing the waters with Objective-C, Xcode, iOS
+
+Test file structure:
+The initial unit tests are based on this file: 
+
+honeycakecoffee.gif
+-------------------
 Byte		Block
 0		Header
 781		Application Extension

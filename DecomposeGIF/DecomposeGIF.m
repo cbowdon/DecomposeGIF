@@ -209,8 +209,18 @@
 	return 8;	
 }
 -(int)imageSize:(int)byteNum {
-	int 
-	return 0;	
+
+	// extract packed fields from image descriptor
+	NSData *packedFieldData = [ByteBits byteToBits:[self extractSingleByte:byteNum+9]];
+	unsigned char packedField[8];
+	[packedFieldData getBytes:packedField];	
+	// local color table size
+	int lctFlag = packedField[0];
+	int lctExpt = 1 + lctFlag*(4*packedField[5]+2*packedField[6]+packedField[7]);
+	int lctSize = pow(2,lctExpt);
+	int sbSize = [self subblocksSize:byteNum+9+lctSize+2];
+	
+	return sbSize-byteNum;	
 }
 -(int)appnSize:(int)byteNum {
 	int sbSize = [self subblocksSize:byteNum+14];
