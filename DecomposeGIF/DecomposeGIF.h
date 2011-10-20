@@ -31,6 +31,7 @@
 // helper functions
 -(unsigned char)extractSingleByte:(int)byteNum;
 -(unsigned short)extractShort:(int)byteNum;
+-(int)subblocksSize:(int)byteNum;
 -(int)findNextImg:(int)byteNum numImages:(int)n;
 
 // predicates for recognising block types
@@ -43,9 +44,9 @@
 -(BOOL)isPlainText:(int)byteNum;
 -(BOOL)isTrailer:(int)byteNum;
 -(BOOL)isExtension:(int)byteNum;
+-(BOOL)isAnimated;
 
 // methods for calculating block sizes
--(int)subblocksSize:(int)byteNum;
 -(int)headerSize:(int)byteNum;
 -(int)gceSize:(int)byteNum;
 -(int)imageSize:(int)byteNum;

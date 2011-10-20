@@ -26,13 +26,11 @@
     return self;
 }
 
-
 // index the GIF blocks
 
 -(NSMutableDictionary*)indexBlocks {
 	return [NSMutableDictionary dictionaryWithCapacity:0];
 }
-
 
 // helper functions
 
@@ -48,6 +46,20 @@
 	NSRange rangeOfTwo = {byteNum, 2};
 	[contents getBytes:ans range:rangeOfTwo];
 	return (int)ans[0]+256*(int)ans[1];
+}
+
+-(int)subblocksSize:(int)byteNum {
+	int b = byteNum;
+	while (b <= [contents length]) {
+		if ([self isTrailer:b] ||
+			[self isImage:b] ||
+			[self isExtension:b]) {
+			return b;
+		} else {
+			b = b+1+[self extractSingleByte:b];
+		}
+	}
+	return [contents length] - 1;
 }
 
 -(int)findNextImg:(int)byteNum numImages:(int)n {
@@ -195,21 +207,15 @@
 	}
 }
 
-// sizes
-
--(int)subblocksSize:(int)byteNum {
-	int b = byteNum;
-	while (b <= [contents length]) {
-		if ([self isTrailer:b] ||
-			[self isImage:b] ||
-			[self isExtension:b]) {
-			return b;
-		} else {
-			b = b+1+[self extractSingleByte:b];
-		}
+-(BOOL)isAnimated {
+	if ([self findNextImg:0 numImages:2] > 0) {
+		return YES;
+	} else {
+		return NO;
 	}
-	return [contents length] - 1;
 }
+
+// sizes
 
 -(int)headerSize:(int)byteNum {
 	
@@ -225,9 +231,11 @@
 	
 	return metadataSize+rgb*gctSize;
 }
+
 -(int)gceSize:(int)byteNum {
-	return 8;	
+	return 8;		
 }
+
 -(int)imageSize:(int)byteNum {
 	
 	// extract packed fields from image descriptor

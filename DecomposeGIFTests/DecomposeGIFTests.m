@@ -43,6 +43,8 @@
 	STAssertTrue([honey isImage:808],@"Image descriptor at 800");
 	STAssertTrue([honey isAppn:781], @"Application extension at 781");
 	STAssertTrue([honey isTrailer:114695], @"Trailer at 114695");
+	
+	STAssertTrue([honey isAnimated], @"Animated?");
 }
 
 -(void)testSizes {
