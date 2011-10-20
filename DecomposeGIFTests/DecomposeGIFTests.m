@@ -13,8 +13,7 @@
 {
     [super setUp];
 	
-	filename = @"/Users/chris/Pictures/honeycakecoffee.gif";
-	dg = [[DecomposeGIF alloc] initWithFile:filename];
+	honey = [[DecomposeGIF alloc] initWithFile:@"/Users/chris/Pictures/honeycakecoffee.gif"];
 	    
     // Set-up code here.	
 }
@@ -28,33 +27,33 @@
 
 - (void)testPredicates {
 	
-	STAssertTrue([dg isGIF],@"Gif?");
+	STAssertTrue([honey isGIF],@"Gif?");
 	
-	STAssertTrue([dg isHeader:0],@"Header at 0");
+	STAssertTrue([honey isHeader:0],@"Header at 0");
 	
-	STAssertFalse([dg isGCE:780],@"No GCE at 780");
-	STAssertFalse([dg isGCE:114694],@"Exceeded EOF");
-	STAssertFalse([dg isImage:780],@"No image descriptor at 780");
-	STAssertFalse([dg isAppn:780],@"No application extension at 780");
-	STAssertFalse([dg isComment:780],@"No comment at 780");
-	STAssertFalse([dg isPlainText:780],@"No plain text at 780");	
-	STAssertFalse([dg isTrailer:780],@"No trailer at 780");
+	STAssertFalse([honey isGCE:780],@"No GCE at 780");
+	STAssertFalse([honey isGCE:114694],@"Exceeded EOF");
+	STAssertFalse([honey isImage:780],@"No image descriptor at 780");
+	STAssertFalse([honey isAppn:780],@"No application extension at 780");
+	STAssertFalse([honey isComment:780],@"No comment at 780");
+	STAssertFalse([honey isPlainText:780],@"No plain text at 780");	
+	STAssertFalse([honey isTrailer:780],@"No trailer at 780");
 	
-	STAssertTrue([dg isGCE:800],@"GCE at 800");
-	STAssertTrue([dg isImage:808],@"Image descriptor at 800");
-	STAssertTrue([dg isAppn:781], @"Application extension at 781");
-	STAssertTrue([dg isTrailer:114695], @"Trailer at 114695");
+	STAssertTrue([honey isGCE:800],@"GCE at 800");
+	STAssertTrue([honey isImage:808],@"Image descriptor at 800");
+	STAssertTrue([honey isAppn:781], @"Application extension at 781");
+	STAssertTrue([honey isTrailer:114695], @"Trailer at 114695");
 }
 
 -(void)testSizes {
 	
-	STAssertEquals(781, [dg headerSize:0], @"Header size is 781");
-	STAssertEquals(19, [dg appnSize:781], @"Application size is 19");
-	STAssertEquals(8, [dg gceSize:800], @"GCE size is 8");
-	STAssertEquals(29899, [dg imageSize:808], @"Image 0 size is 29899");
-	STAssertEquals(26999, [dg imageSize:30715], @"Image 1 size is 26999");
-	STAssertEquals(23745, [dg imageSize:57722], @"Image 2 size is 23745");
-	STAssertEquals(33220, [dg imageSize:81475], @"Image 3 size is 33220");
+	STAssertEquals(781, [honey headerSize:0], @"Header size is 781");
+	STAssertEquals(19, [honey appnSize:781], @"Application size is 19");
+	STAssertEquals(8, [honey gceSize:800], @"GCE size is 8");
+	STAssertEquals(29899, [honey imageSize:808], @"Image 0 size is 29899");
+	STAssertEquals(26999, [honey imageSize:30715], @"Image 1 size is 26999");
+	STAssertEquals(23745, [honey imageSize:57722], @"Image 2 size is 23745");
+	STAssertEquals(33220, [honey imageSize:81475], @"Image 3 size is 33220");
 }
 
 @end

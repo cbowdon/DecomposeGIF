@@ -21,11 +21,18 @@
 		contents = [NSData dataWithContentsOfFile:self.filename];
 		self.width = [self extractShort:6];
 		self.height = [self extractShort:8];
-		blockPositions = [self indexBlocks];
-		
+		blockPositions = [self indexBlocks];		
     }    
     return self;
 }
+
+
+// index the GIF blocks
+
+-(NSMutableDictionary*)indexBlocks {
+	return [NSMutableDictionary dictionaryWithCapacity:0];
+}
+
 
 // helper functions
 
@@ -43,16 +50,32 @@
 	return (int)ans[0]+256*(int)ans[1];
 }
 
-// index the GIF blocks
-
--(NSMutableDictionary*)indexBlocks {
-	return [NSMutableDictionary dictionaryWithCapacity:0];
+-(int)findNextImg:(int)byteNum numImages:(int)n {
+	int count = 0;
+	int b = byteNum;
+	while (count < n) {
+		if (b > [contents length]) {
+			return 0;
+		} else if ([self isImage:b]) {
+			b += 1;
+			count += 1;
+		} else {
+			b += 1;
+		}
+	}
+	return b-1;
 }
 
 // predicates
 
--(BOOL)isGIF {	
-	return NO;
+-(BOOL)isGIF {
+	if ([self isHeader:0] ||
+		[self findNextImg:0 numImages:1] != 0 ||
+		[self isTrailer:[contents length]-1]) {
+		return YES;
+	} else {
+		return NO;
+	}
 }
 
 -(BOOL)isHeader:(int)byteNum {
@@ -138,7 +161,6 @@
 		return NO;
 	}
 }
-
 -(BOOL)isPlainText:(int)byteNum {
 	if ([contents length] < byteNum+3) {
 		return NO;
@@ -154,7 +176,6 @@
 		return NO;
 	}
 }
-
 -(BOOL)isTrailer:(int)byteNum {
 	if ((int)[self extractSingleByte:byteNum] == 59 &&
 		byteNum == [contents length] - 1) {
@@ -163,7 +184,6 @@
 		return NO;
 	}
 }
-
 -(BOOL)isExtension:(int)byteNum {
 	if ([self isGCE:byteNum] ||
 		[self isComment:byteNum] ||
@@ -192,7 +212,7 @@
 }
 
 -(int)headerSize:(int)byteNum {
-
+	
 	NSData *packedFieldData = [ByteBits byteToBits:[self extractSingleByte:10]];
 	unsigned char packedField[8];
 	[packedFieldData getBytes:packedField];	
@@ -209,7 +229,7 @@
 	return 8;	
 }
 -(int)imageSize:(int)byteNum {
-
+	
 	// extract packed fields from image descriptor
 	NSData *packedFieldData = [ByteBits byteToBits:[self extractSingleByte:byteNum+9]];
 	unsigned char packedField[8];
@@ -226,12 +246,17 @@
 	int sbSize = [self subblocksSize:byteNum+14];
 	return sbSize-byteNum;	
 }
+
 -(int)commentSize:(int)byteNum {
-	return 0;	
+	int sbSize = [self subblocksSize:byteNum+2];
+	return sbSize-byteNum;	
 }
+
 -(int)plainTextSize:(int)byteNum {
-	return 0;	
+	int sbSize = [self subblocksSize:byteNum+15];
+	return sbSize-byteNum;		
 }
+
 
 
 @end

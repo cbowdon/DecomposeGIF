@@ -25,12 +25,13 @@
 
 -(id)initWithFile:(NSString*)filepath;
 
+// steps through contents, filling out blockPositions
+-(NSMutableDictionary*)indexBlocks;
+
 // helper functions
 -(unsigned char)extractSingleByte:(int)byteNum;
 -(unsigned short)extractShort:(int)byteNum;
-
-// steps through contents, filling out blockPositions
--(NSMutableDictionary*)indexBlocks;
+-(int)findNextImg:(int)byteNum numImages:(int)n;
 
 // predicates for recognising block types
 -(BOOL)isGIF;

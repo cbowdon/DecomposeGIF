@@ -11,8 +11,7 @@
 
 @interface DecomposeGIFTests : SenTestCase {
 
-	NSString *filename;
-	DecomposeGIF *dg;
+	DecomposeGIF *honey;
 }
 
 @end
