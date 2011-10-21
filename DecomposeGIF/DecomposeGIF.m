@@ -10,7 +10,7 @@
 
 @implementation DecomposeGIF
 
-@synthesize filename, width, height;
+@synthesize filename, width, height, blockPositions;
 
 -(id)initWithFile:(NSString*)filepath
 {
@@ -29,7 +29,37 @@
 // index the GIF blocks
 
 -(NSMutableDictionary*)indexBlocks {
-	return [NSMutableDictionary dictionaryWithCapacity:0];
+	NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+	
+	int b = 0;
+	while (b < [contents length]) {
+		if ([self isHeader:b]) {
+			[dict setObject:@"Header" forKey:[NSNumber numberWithInt:b]];	
+			b += [self headerSize:b];
+		} else if ([self isImage:b]) {
+			[dict setObject:@"Image Descriptor" forKey:[NSNumber numberWithInt:b]];
+			b += [self imageSize:b];
+		} else if ([self isGCE:b]) {
+			[dict setObject:@"Graphic Control Extension" forKey:[NSNumber numberWithInt:b]];
+			b += [self gceSize:b];
+		} else if ([self isAppn:b]) {
+			[dict setObject:@"Application Extension" forKey:[NSNumber numberWithInt:b]];
+			b += [self appnSize:b];
+		} else if ([self isComment:b]) {
+			[dict setObject:@"Comment Extension" forKey:[NSNumber numberWithInt:b]];
+			b += [self commentSize:b];
+		} else if ([self isPlainText:b]) {
+			[dict setObject:@"Plain Text Extension" forKey:[NSNumber numberWithInt:b]];
+			b += [self plainTextSize:b];			
+		} else if ([self isTrailer:b]) {
+			[dict setObject:@"Trailer" forKey:[NSNumber numberWithInt:b]];	
+			break;
+		} else {
+			[dict setObject:@"Unknown" forKey:[NSNumber numberWithInt:b]];	
+			b += 1;
+		}
+	}	
+	return dict;
 }
 
 // helper functions

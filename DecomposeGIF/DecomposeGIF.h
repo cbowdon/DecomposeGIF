@@ -20,6 +20,7 @@
 
 // Properties are for external access
 @property (nonatomic, strong) NSString *filename;
+@property (nonatomic, strong) NSMutableDictionary *blockPositions;
 @property int width;
 @property int height;
 

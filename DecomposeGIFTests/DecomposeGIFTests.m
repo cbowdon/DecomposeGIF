@@ -58,4 +58,19 @@
 	STAssertEquals(33220, [honey imageSize:81475], @"Image 3 size is 33220");
 }
 
+-(void)testIndexer {
+	
+	STAssertEquals([honey.blockPositions objectForKey:[NSNumber numberWithInt:0]], @"Header", @"Byte 0 is header");
+	STAssertEquals([honey.blockPositions objectForKey:[NSNumber numberWithInt:781]], @"Application Extension", @"Byte 781 is appn");
+	STAssertEquals([honey.blockPositions objectForKey:[NSNumber numberWithInt:800]], @"Graphic Control Extension", @"Byte 800 is GCE");
+	STAssertEquals([honey.blockPositions objectForKey:[NSNumber numberWithInt:808]], @"Image Descriptor", @"Byte 808 is img");
+	STAssertEquals([honey.blockPositions objectForKey:[NSNumber numberWithInt:30707]], @"Graphic Control Extension", @"Byte 30707 is GCE");
+	STAssertEquals([honey.blockPositions objectForKey:[NSNumber numberWithInt:30715]], @"Image Descriptor", @"Byte 30715 is img");
+	STAssertEquals([honey.blockPositions objectForKey:[NSNumber numberWithInt:57714]], @"Graphic Control Extension", @"Byte 57714 is GCE");
+	STAssertEquals([honey.blockPositions objectForKey:[NSNumber numberWithInt:57722]], @"Image Descriptor", @"Byte 57722 is img");
+	STAssertEquals([honey.blockPositions objectForKey:[NSNumber numberWithInt:81467]], @"Graphic Control Extension", @"Byte 81467 is GCE");
+	STAssertEquals([honey.blockPositions objectForKey:[NSNumber numberWithInt:81475]], @"Image Descriptor", @"Byte 81475 is img");	
+	STAssertEquals([honey.blockPositions objectForKey:[NSNumber numberWithInt:114695]], @"Trailer", @"Byte 114695 is trailer");
+}
+
 @end
