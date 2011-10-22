@@ -15,30 +15,39 @@
 	
 	honey = [[DecomposeGIF alloc] initWithFile:@"/Users/chris/Pictures/honeycakecoffee.gif"];
 	    
-    // Set-up code here.	
 }
 
 - (void)tearDown
 {
     // Tear-down code here.
-
+	
+	// delete pngs
+	
     [super tearDown];
+}
+
+-(void)testHelpers {
+	
+	// findNextImage should return either accurate byte index, or zero
+	STAssertEquals([honey findNextImage:0 numImages:1], 808, @"First image is at byte index 808");	
+	STAssertEquals([honey findNextImage:0 numImages:2], 30715, @"Second image is at byte index 30715");	
+	STAssertEquals([honey findNextImage:0 numImages:4], 81475, @"Fourth image is at byte index 81475");
+	STAssertEquals([honey findNextImage:0 numImages:5], 0, @"Less than 5 images in honey");
+	
 }
 
 - (void)testPredicates {
 	
 	STAssertTrue([honey isGIF],@"Gif?");
 	
-	STAssertTrue([honey isHeader:0],@"Header at 0");
-	
+	STAssertTrue([honey isHeader:0],@"Header at 0");	
 	STAssertFalse([honey isGCE:780],@"No GCE at 780");
 	STAssertFalse([honey isGCE:114694],@"Exceeded EOF");
 	STAssertFalse([honey isImage:780],@"No image descriptor at 780");
 	STAssertFalse([honey isAppn:780],@"No application extension at 780");
 	STAssertFalse([honey isComment:780],@"No comment at 780");
 	STAssertFalse([honey isPlainText:780],@"No plain text at 780");	
-	STAssertFalse([honey isTrailer:780],@"No trailer at 780");
-	
+	STAssertFalse([honey isTrailer:780],@"No trailer at 780");	
 	STAssertTrue([honey isGCE:800],@"GCE at 800");
 	STAssertTrue([honey isImage:808],@"Image descriptor at 800");
 	STAssertTrue([honey isAppn:781], @"Application extension at 781");
@@ -71,6 +80,10 @@
 	STAssertEquals([honey.blockPositions objectForKey:[NSNumber numberWithInt:81467]], @"Graphic Control Extension", @"Byte 81467 is GCE");
 	STAssertEquals([honey.blockPositions objectForKey:[NSNumber numberWithInt:81475]], @"Image Descriptor", @"Byte 81475 is img");	
 	STAssertEquals([honey.blockPositions objectForKey:[NSNumber numberWithInt:114695]], @"Trailer", @"Byte 114695 is trailer");
+}
+
+-(void)testMakePNGs {
+	// Should check that all the valid PNG files were made
 }
 
 @end

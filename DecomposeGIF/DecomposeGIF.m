@@ -6,11 +6,12 @@
 //  Copyright 2011年 __MyCompanyName__. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
 #import "DecomposeGIF.h"
 
 @implementation DecomposeGIF
 
-@synthesize filename, width, height, blockPositions;
+@synthesize filename, width, height, blockPositions, sortedKeys;
 
 -(id)initWithFile:(NSString*)filepath
 {
@@ -21,7 +22,9 @@
 		contents = [NSData dataWithContentsOfFile:self.filename];
 		self.width = [self extractShort:6];
 		self.height = [self extractShort:8];
-		blockPositions = [self indexBlocks];		
+		self.blockPositions = [self indexBlocks];		
+		self.sortedKeys = [[self.blockPositions allKeys] sortedArrayUsingSelector:@selector(compare:)];
+		
     }    
     return self;
 }
@@ -92,27 +95,30 @@
 	return [contents length] - 1;
 }
 
--(int)findNextImg:(int)byteNum numImages:(int)n {
+-(int)findNextImage:(int)byteNum numImages:(int)n {
+
 	int count = 0;
-	int b = byteNum;
+	int i = 0;
+	NSNumber *byteIndex;
 	while (count < n) {
-		if (b > [contents length]) {
+		if (i >= [self.sortedKeys count]) {
 			return 0;
-		} else if ([self isImage:b]) {
-			b += 1;
-			count += 1;
-		} else {
-			b += 1;
 		}
-	}
-	return b-1;
+		byteIndex = [self.sortedKeys objectAtIndex:i];
+		NSString *blk = [self.blockPositions objectForKey:byteIndex];
+		if ([blk isEqualToString:@"Image Descriptor"]) {
+			count += 1;						
+		}
+		i += 1;
+	}	
+	return [byteIndex intValue];
 }
 
 // predicates
 
 -(BOOL)isGIF {
 	if ([self isHeader:0] ||
-		[self findNextImg:0 numImages:1] != 0 ||
+		[self findNextImage:0 numImages:1] != 0 ||
 		[self isTrailer:[contents length]-1]) {
 		return YES;
 	} else {
@@ -238,7 +244,7 @@
 }
 
 -(BOOL)isAnimated {
-	if ([self findNextImg:0 numImages:2] > 0) {
+	if ([self findNextImage:0 numImages:2] > 0) {
 		return YES;
 	} else {
 		return NO;
@@ -293,6 +299,16 @@
 -(int)plainTextSize:(int)byteNum {
 	int sbSize = [self subblocksSize:byteNum+15];
 	return sbSize-byteNum;		
+}
+
+// output as PNGs
+-(BOOL)makePNGs {
+	
+	UIImage *img = [UIImage imageWithData:contents];	
+	NSData *data1 = [NSData dataWithData:UIImagePNGRepresentation(img)];
+	[data1 writeToFile:@"/Users/chris/Desktop/test.png" atomically:YES];
+
+	return NO;
 }
 
 

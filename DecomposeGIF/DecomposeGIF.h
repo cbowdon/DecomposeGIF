@@ -15,12 +15,14 @@
 	// full contents of file: loaded in header
 	NSData *contents;
 	NSMutableDictionary *blockPositions;
+	NSArray *sortedKeys;
 	
 }
 
 // Properties are for external access
 @property (nonatomic, strong) NSString *filename;
 @property (nonatomic, strong) NSMutableDictionary *blockPositions;
+@property (nonatomic, strong) NSArray *sortedKeys;
 @property int width;
 @property int height;
 
@@ -33,7 +35,7 @@
 -(unsigned char)extractSingleByte:(int)byteNum;
 -(unsigned short)extractShort:(int)byteNum;
 -(int)subblocksSize:(int)byteNum;
--(int)findNextImg:(int)byteNum numImages:(int)n;
+-(int)findNextImage:(int)byteNum numImages:(int)n;
 
 // predicates for recognising block types
 -(BOOL)isGIF;
@@ -54,5 +56,8 @@
 -(int)appnSize:(int)byteNum;
 -(int)commentSize:(int)byteNum;
 -(int)plainTextSize:(int)byteNum;
+
+// output as png images
+-(BOOL)makePNGs;
 
 @end
