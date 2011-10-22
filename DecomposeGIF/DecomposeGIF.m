@@ -304,6 +304,16 @@
 // output as PNGs
 -(BOOL)makePNGs {
 	
+	// header is header
+	// trailer is ';'
+	
+//	walk through sortedKeys:
+//	if key value is image, find the end of that image 
+//	make data object of header+image+;	
+//	if key value is gce, find the next image and then find the end of that image
+//	make data object of header+gce+image+;
+//	move on to next key
+	
 	UIImage *img = [UIImage imageWithData:contents];	
 	NSData *data1 = [NSData dataWithData:UIImagePNGRepresentation(img)];
 	[data1 writeToFile:@"/Users/chris/Desktop/test.png" atomically:YES];
