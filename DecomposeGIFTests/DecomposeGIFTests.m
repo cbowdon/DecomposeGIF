@@ -88,7 +88,7 @@
 	NSString *testDir = @"/Users/chris/Desktop/";
 	NSFileManager *fileMan = [NSFileManager defaultManager];
 	
-	[honey makePNGs];
+	STAssertTrue([honey makePNGs:testDir], @"Did it work?");
 	
 	NSPredicate *pngFilter = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] %@", @".png"];
 	NSArray *output = [[fileMan contentsOfDirectoryAtPath:testDir error:nil] filteredArrayUsingPredicate:pngFilter];
@@ -97,8 +97,9 @@
 	
 	uint i;
 	for (i = 0; i < [output count]; i++) {
-		
-		[fileMan removeItemAtPath:[testDir stringByAppendingString:[output objectAtIndex:i]] error:nil];
+		NSString *fileName = [NSString stringWithFormat:@"test-%i.png", i];
+		STAssertTrue([[output objectAtIndex:i] isEqualToString:fileName], @"Right filename/number");
+		//[fileMan removeItemAtPath:[testDir stringByAppendingString:[output objectAtIndex:i]] error:nil];
 	}
 	
 }

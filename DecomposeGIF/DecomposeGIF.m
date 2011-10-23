@@ -114,6 +114,12 @@
 	return [byteIndex intValue];
 }
 
+-(BOOL)writeDataToPNG:(NSData *)data toFile:(NSString*)name {
+	UIImage *img = [UIImage imageWithData:data];	
+	NSData *data1 = [NSData dataWithData:UIImagePNGRepresentation(img)];
+	return [data1 writeToFile:name atomically:YES];
+}
+
 // predicates
 
 -(BOOL)isGIF {
@@ -302,7 +308,9 @@
 }
 
 // output as PNGs
--(BOOL)makePNGs {
+-(BOOL)makePNGs:(NSString*)inDir {
+	
+	BOOL didItWork;
 	
 	// header is header
 	NSRange headerRange = {0, [self headerSize:0]};
@@ -312,6 +320,7 @@
 	NSData *trailer = [contents subdataWithRange:trailerRange];
 	
 	int i = 0;
+	int count = 0;
 	NSNumber *byteIndex, *byteIndex1;
 	
 	while (i < [self.sortedKeys count]-1) {
@@ -321,9 +330,19 @@
 		NSString *blk = [self.blockPositions objectForKey:byteIndex];
 		
 		if ([blk isEqualToString:@"Image Descriptor"]) {
+
 			int i0 = [byteIndex intValue];
 			int i1 = [byteIndex1 intValue];
-			NSRange range = {i0, i1-i0};
+			NSRange imgRange = {i0, i1-i0};
+			NSData *img = [contents subdataWithRange:imgRange];
+			NSMutableData *output = [NSMutableData dataWithData:header];
+			[output appendData:img];
+			[output appendData:trailer];
+			didItWork = [self writeDataToPNG:output toFile:[NSString stringWithFormat:@"%@/test-%i.png", inDir, count]];
+			count += 1;
+			if (!didItWork) {
+				return NO;
+			}
 		}
 		
 		i += 1;
@@ -339,11 +358,8 @@
 	//	write to file
 	//	move on to next key
 	
-	UIImage *img = [UIImage imageWithData:contents];	
-	NSData *data1 = [NSData dataWithData:UIImagePNGRepresentation(img)];
-	[data1 writeToFile:@"/Users/chris/Desktop/test.png" atomically:YES];
 	
-	return NO;
+	return didItWork;
 }
 
 

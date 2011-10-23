@@ -36,6 +36,7 @@
 -(unsigned short)extractShort:(int)byteNum;
 -(int)subblocksSize:(int)byteNum;
 -(int)findNextImage:(int)byteNum numImages:(int)n;
+-(BOOL)writeDataToPNG:(NSData*)data toFile:(NSString*)name;
 
 // predicates for recognising block types
 -(BOOL)isGIF;
@@ -58,6 +59,6 @@
 -(int)plainTextSize:(int)byteNum;
 
 // output as png images
--(BOOL)makePNGs;
+-(BOOL)makePNGs:(NSString*)inDir;
 
 @end
