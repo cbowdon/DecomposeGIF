@@ -83,7 +83,24 @@
 }
 
 -(void)testMakePNGs {
-	// Should check that all the valid PNG files were made
+	
+	// Should check that all the right PNG files were made
+	NSString *testDir = @"/Users/chris/Desktop/";
+	NSFileManager *fileMan = [NSFileManager defaultManager];
+	
+	[honey makePNGs];
+	
+	NSPredicate *pngFilter = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] %@", @".png"];
+	NSArray *output = [[fileMan contentsOfDirectoryAtPath:testDir error:nil] filteredArrayUsingPredicate:pngFilter];
+	
+	STAssertEquals([output count], (uint)4, @"Should be four images in honey");	
+	
+	uint i;
+	for (i = 0; i < [output count]; i++) {
+		
+		[fileMan removeItemAtPath:[testDir stringByAppendingString:[output objectAtIndex:i]] error:nil];
+	}
+	
 }
 
 @end

@@ -96,7 +96,7 @@
 }
 
 -(int)findNextImage:(int)byteNum numImages:(int)n {
-
+	
 	int count = 0;
 	int i = 0;
 	NSNumber *byteIndex;
@@ -305,19 +305,44 @@
 -(BOOL)makePNGs {
 	
 	// header is header
+	NSRange headerRange = {0, [self headerSize:0]};
+	NSData *header = [contents subdataWithRange:headerRange];		
 	// trailer is ';'
+	NSRange trailerRange = {[contents length]-1, 1};
+	NSData *trailer = [contents subdataWithRange:trailerRange];
 	
-//	walk through sortedKeys:
-//	if key value is image, find the end of that image 
-//	make data object of header+image+;	
-//	if key value is gce, find the next image and then find the end of that image
-//	make data object of header+gce+image+;
-//	move on to next key
+	int i = 0;
+	NSNumber *byteIndex, *byteIndex1;
+	
+	while (i < [self.sortedKeys count]-1) {
+		
+		byteIndex = [self.sortedKeys objectAtIndex:i];
+		byteIndex1 = [self.sortedKeys objectAtIndex:i+1];		
+		NSString *blk = [self.blockPositions objectForKey:byteIndex];
+		
+		if ([blk isEqualToString:@"Image Descriptor"]) {
+			int i0 = [byteIndex intValue];
+			int i1 = [byteIndex1 intValue];
+			NSRange range = {i0, i1-i0};
+		}
+		
+		i += 1;
+	}
+	
+	
+	//	walk through sortedKeys:
+	//	if key value is image, find the end of that image 
+	//	make data object of header+image+;
+	//	write to file
+	//	if key value is gce, find the next image and then find the end of that image
+	//	make data object of header+gce+image+;
+	//	write to file
+	//	move on to next key
 	
 	UIImage *img = [UIImage imageWithData:contents];	
 	NSData *data1 = [NSData dataWithData:UIImagePNGRepresentation(img)];
 	[data1 writeToFile:@"/Users/chris/Desktop/test.png" atomically:YES];
-
+	
 	return NO;
 }
 
