@@ -12,6 +12,7 @@
 @interface DecomposeGIFTests : SenTestCase {
 
 	DecomposeGIF *honey;
+	DecomposeGIF *newton;
 }
 
 @end

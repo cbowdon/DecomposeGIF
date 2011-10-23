@@ -308,9 +308,10 @@
 }
 
 // output as PNGs
--(BOOL)makePNGs:(NSString*)inDir {
+-(BOOL)makePNGs:(NSString*)inDir withName:(NSString*)name;{
 	
 	BOOL didItWork;
+	BOOL shouldWrite = NO;
 	
 	// header is header
 	NSRange headerRange = {0, [self headerSize:0]};
@@ -326,11 +327,35 @@
 	while (i < [self.sortedKeys count]-1) {
 		
 		byteIndex = [self.sortedKeys objectAtIndex:i];
-		byteIndex1 = [self.sortedKeys objectAtIndex:i+1];		
 		NSString *blk = [self.blockPositions objectForKey:byteIndex];
 		
-		if ([blk isEqualToString:@"Image Descriptor"]) {
+		if ([blk isEqualToString:@"Graphic Control Extension"]) {
+			
+			// find next image
+			NSNumber *nextIndex; 
+			while (YES) {
+				if (i+1 >= [self.sortedKeys count]) {
+					NSLog(@"makePNGs: Corrupted GIF file!");
+					return NO;
+				}
+				nextIndex = [self.sortedKeys objectAtIndex:i];
+				if ([[self.blockPositions objectForKey:nextIndex] isEqualToString:@"Image Descriptor"]) {
+					byteIndex1 = [self.sortedKeys objectAtIndex:i+1];
+					shouldWrite = YES;
+					break;
+				} else {
+					i += 1;
+				}
+			}
+		}
+		
+		if ([blk isEqualToString:@"Image Descriptor"]) {			
+			byteIndex1 = [self.sortedKeys objectAtIndex:i+1];
+			shouldWrite = YES;
+		} 
 
+		
+		if (shouldWrite) {
 			int i0 = [byteIndex intValue];
 			int i1 = [byteIndex1 intValue];
 			NSRange imgRange = {i0, i1-i0};
@@ -338,7 +363,13 @@
 			NSMutableData *output = [NSMutableData dataWithData:header];
 			[output appendData:img];
 			[output appendData:trailer];
-			didItWork = [self writeDataToPNG:output toFile:[NSString stringWithFormat:@"%@/test-%i.png", inDir, count]];
+			
+			NSString *fileName = [NSString stringWithFormat:@"%@-%i",name,count];
+			NSString *extension = @"png";
+			NSString *fullPath = [inDir stringByAppendingPathComponent:fileName];
+			fullPath = [fullPath stringByAppendingPathExtension:extension];
+			
+			didItWork = [self writeDataToPNG:output toFile:fullPath];
 			count += 1;
 			if (!didItWork) {
 				return NO;
@@ -346,18 +377,8 @@
 		}
 		
 		i += 1;
+		shouldWrite = NO;
 	}
-	
-	
-	//	walk through sortedKeys:
-	//	if key value is image, find the end of that image 
-	//	make data object of header+image+;
-	//	write to file
-	//	if key value is gce, find the next image and then find the end of that image
-	//	make data object of header+gce+image+;
-	//	write to file
-	//	move on to next key
-	
 	
 	return didItWork;
 }

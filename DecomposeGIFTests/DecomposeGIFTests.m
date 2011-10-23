@@ -14,6 +14,7 @@
     [super setUp];
 	
 	honey = [[DecomposeGIF alloc] initWithFile:@"/Users/chris/Pictures/honeycakecoffee.gif"];
+	newton = [[DecomposeGIF alloc] initWithFile:@"/Users/chris/Pictures/Newtons_cradle_animation_book_2.gif"];
 	    
 }
 
@@ -88,7 +89,7 @@
 	NSString *testDir = @"/Users/chris/Desktop/";
 	NSFileManager *fileMan = [NSFileManager defaultManager];
 	
-	STAssertTrue([honey makePNGs:testDir], @"Did it work?");
+	STAssertTrue([honey makePNGs:testDir withName:@"test"], @"Did it work?");
 	
 	NSPredicate *pngFilter = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] %@", @".png"];
 	NSArray *output = [[fileMan contentsOfDirectoryAtPath:testDir error:nil] filteredArrayUsingPredicate:pngFilter];
@@ -99,8 +100,11 @@
 	for (i = 0; i < [output count]; i++) {
 		NSString *fileName = [NSString stringWithFormat:@"test-%i.png", i];
 		STAssertTrue([[output objectAtIndex:i] isEqualToString:fileName], @"Right filename/number");
-		//[fileMan removeItemAtPath:[testDir stringByAppendingString:[output objectAtIndex:i]] error:nil];
+		[fileMan removeItemAtPath:[testDir stringByAppendingString:[output objectAtIndex:i]] error:nil];
 	}
+	
+	// test transparency
+	//[newton makePNGs:testDir withName:@"newton"];
 	
 }
 
