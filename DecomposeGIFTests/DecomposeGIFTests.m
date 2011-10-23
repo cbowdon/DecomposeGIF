@@ -110,7 +110,7 @@
 	}
 	
 	// test transparency
-	//[newton makePNGs:testDir withName:@"newton"];
+	[newton writePNGs:testDir withName:@"newton"];
 	
 }
 

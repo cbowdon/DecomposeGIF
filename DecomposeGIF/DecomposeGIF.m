@@ -310,6 +310,14 @@
 // output as PNGs
 
 -(NSMutableArray*)makePNGs {
+	
+	// header is header
+	NSRange headerRange = {0, [self headerSize:0]};
+	NSData *header = [contents subdataWithRange:headerRange];		
+	// trailer is ';'
+	NSRange trailerRange = {[contents length]-1, 1};
+	NSData *trailer = [contents subdataWithRange:trailerRange];
+	
 	return nil;
 }
 
