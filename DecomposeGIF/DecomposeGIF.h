@@ -59,6 +59,7 @@
 -(int)plainTextSize:(int)byteNum;
 
 // output as png images
--(BOOL)makePNGs:(NSString*)inDir withName:(NSString*)name;
+-(NSMutableArray*)makePNGs;
+-(BOOL)writePNGs:(NSString*)inDir withName:(NSString*)name;
 
 @end

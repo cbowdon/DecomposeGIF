@@ -308,7 +308,12 @@
 }
 
 // output as PNGs
--(BOOL)makePNGs:(NSString*)inDir withName:(NSString*)name;{
+
+-(NSMutableArray*)makePNGs {
+	return nil;
+}
+
+-(BOOL)writePNGs:(NSString*)inDir withName:(NSString*)name;{
 	
 	BOOL didItWork;
 	BOOL shouldWrite = NO;

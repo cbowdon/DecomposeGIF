@@ -83,13 +83,19 @@
 	STAssertEquals([honey.blockPositions objectForKey:[NSNumber numberWithInt:114695]], @"Trailer", @"Byte 114695 is trailer");
 }
 
+
 -(void)testMakePNGs {
+	NSMutableArray *output = [honey makePNGs];
+	STAssertEquals([output count], (uint)4, @"Should be four images in honey");
+}
+
+-(void)testWritePNGs {
 	
 	// Should check that all the right PNG files were made
 	NSString *testDir = @"/Users/chris/Desktop/";
 	NSFileManager *fileMan = [NSFileManager defaultManager];
 	
-	STAssertTrue([honey makePNGs:testDir withName:@"test"], @"Did it work?");
+	STAssertTrue([honey writePNGs:testDir withName:@"test"], @"Did it work?");
 	
 	NSPredicate *pngFilter = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] %@", @".png"];
 	NSArray *output = [[fileMan contentsOfDirectoryAtPath:testDir error:nil] filteredArrayUsingPredicate:pngFilter];
