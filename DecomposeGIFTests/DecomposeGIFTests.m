@@ -57,8 +57,7 @@
 	STAssertTrue([honey isAnimated], @"Animated?");
 	
 	STAssertTrue([newton isGCE:97147], @"GCE at 97147");
-	STAssertTrue([newton isImage:97155], @"Image at 97155");
-	
+	STAssertTrue([newton isImage:97155], @"Image at 97155");	
 	STAssertTrue([newton isGCE:106015], @"GCE at 106015");
 	STAssertTrue([newton isImage:106023], @"GCE at 106023");
 		
@@ -73,7 +72,7 @@
 	STAssertEquals(26999, [honey imageSize:30715], @"Image 1 size is 26999");
 	STAssertEquals(23745, [honey imageSize:57722], @"Image 2 size is 23745");
 	STAssertEquals(33220, [honey imageSize:81475], @"Image 3 size is 33220");
-	
+		
 	STAssertEquals(8, [newton gceSize:84778], @"GCE in Newton");
 	STAssertEquals(12361, [newton imageSize:84786], @"Image in Newton");
 	STAssertEquals(8, [newton gceSize:97147], @"GCE in Newton");
@@ -93,12 +92,13 @@
 	STAssertEquals([honey.blockPositions objectForKey:[NSNumber numberWithInt:81467]], @"Graphic Control Extension", @"Byte 81467 is GCE");
 	STAssertEquals([honey.blockPositions objectForKey:[NSNumber numberWithInt:81475]], @"Image Descriptor", @"Byte 81475 is img");	
 	STAssertEquals([honey.blockPositions objectForKey:[NSNumber numberWithInt:114695]], @"Trailer", @"Byte 114695 is trailer");
+	
+	// to do: testIndexer for newton
 }
 
 
 -(void)testMakePNGs {
-	NSMutableArray *output = [honey makePNGs];
-	STAssertEquals([output count], (uint)4, @"Should be four images in honey");
+	STAssertEquals([[honey makePNGs] count], (uint)4, @"Should be four images in honey");
 	STAssertEquals([[newton makePNGs] count], (uint)36, @"Should be 36 images in newton");
 }
 
@@ -114,7 +114,7 @@
 	NSPredicate *pngFilter = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] %@", @".png"];
 	NSArray *output = [[fileMan contentsOfDirectoryAtPath:testDir error:nil] filteredArrayUsingPredicate:pngFilter];
 	
-	STAssertEquals([output count], (uint)4, @"Should be four images in honey");	
+	STAssertEquals([output count], (uint)4, @"Should be four images from honey");	
 	
 	uint i;
 	for (i = 0; i < [output count]; i++) {
@@ -123,7 +123,7 @@
 		[fileMan removeItemAtPath:[testDir stringByAppendingString:[output objectAtIndex:i]] error:nil];
 	}
 	
-	// test transparency	
+	// test transparency (visual inspection)	
 //	[newton writePNGs:[newton makePNGs] inFolder:testDir withName:@"newton"];
 	
 }
