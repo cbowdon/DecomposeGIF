@@ -59,6 +59,6 @@
 
 // output as png images
 -(NSMutableArray*)makePNGs;
--(BOOL)writePNGs:(NSString *)folder withName:(NSString *)name;
+-(BOOL)writePNGs:(NSMutableArray*)array inFolder:(NSString *)folder withName:(NSString *)name;
 
 @end

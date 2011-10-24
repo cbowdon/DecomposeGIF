@@ -368,10 +368,8 @@
 	return pngs;
 }
 
--(BOOL)writePNGs:(NSString *)folder withName:(NSString *)name {
-	
-	NSMutableArray *array = [self makePNGs];
-	
+-(BOOL)writePNGs:(NSMutableArray*)array inFolder:(NSString *)folder withName:(NSString *)name {
+		
 	bool successFlag = NO;
 	uint i;
 	for (i = 0; i < [array count]; i++) {

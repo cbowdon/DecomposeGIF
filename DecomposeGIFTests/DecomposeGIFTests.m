@@ -87,18 +87,17 @@
 -(void)testMakePNGs {
 	NSMutableArray *output = [honey makePNGs];
 	STAssertEquals([output count], (uint)4, @"Should be four images in honey");
+	STAssertEquals([[newton makePNGs] count], (uint)36, @"Should be 36 images in newton");
 }
 
 -(void)testWritePNGs {
 	
 	// Should check that all the right PNG files were made
-	
-		
+			
 	NSString *testDir = @"/Users/chris/Desktop/";
 	NSFileManager *fileMan = [NSFileManager defaultManager];
 	
-	// Check the convenient method
-	STAssertTrue([honey writePNGs:testDir withName:@"test"], @"Did it work?");
+	STAssertTrue([honey writePNGs:[honey makePNGs] inFolder:testDir withName:@"test"], @"Did it work?");
 	
 	NSPredicate *pngFilter = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] %@", @".png"];
 	NSArray *output = [[fileMan contentsOfDirectoryAtPath:testDir error:nil] filteredArrayUsingPredicate:pngFilter];
@@ -111,10 +110,9 @@
 		STAssertTrue([[output objectAtIndex:i] isEqualToString:fileName], @"Right filename/number");
 		[fileMan removeItemAtPath:[testDir stringByAppendingString:[output objectAtIndex:i]] error:nil];
 	}
-
 	
-	// test transparency
-//	[newton writePNGs:testDir withName:@"newton"];
+	// test transparency	
+	// [newton writePNGs:[newton makePNGs] inFolder:testDir withName:@"newton"];
 	
 }
 
