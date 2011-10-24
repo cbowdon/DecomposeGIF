@@ -1,7 +1,10 @@
 What it is:
-- code to extract still images and metadata from GIF animations
+- class to extract still images and metadata from GIF animations
 - a port of 'gif-images' from Racket to Objective-C
 - me testing the waters with Objective-C, Xcode, iOS
+
+Status:
+DecomposeGIF class is complete. Thank you ARC. Time to try and roll it up with a GUI!
 
 Test file structure:
 The initial unit tests are based on this file: 
@@ -20,3 +23,5 @@ Byte		Block
 81467		Graphic Control Extension
 81475		Image Descriptor
 114695		Trailer
+
+and on 'newton' from 'gif-images'
