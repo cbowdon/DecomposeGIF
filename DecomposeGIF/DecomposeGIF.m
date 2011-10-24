@@ -38,27 +38,35 @@
 	while (b < [contents length]) {
 		if ([self isHeader:b]) {
 			[dict setObject:@"Header" forKey:[NSNumber numberWithInt:b]];	
+			NSLog(@"%i\t%@\n", b, @"Header");
 			b += [self headerSize:b];
 		} else if ([self isImage:b]) {
 			[dict setObject:@"Image Descriptor" forKey:[NSNumber numberWithInt:b]];
+			NSLog(@"%i\t%@\n", b, @"Img");
 			b += [self imageSize:b];
 		} else if ([self isGCE:b]) {
 			[dict setObject:@"Graphic Control Extension" forKey:[NSNumber numberWithInt:b]];
+			NSLog(@"%i\t%@\n", b, @"GCE");
 			b += [self gceSize:b];
 		} else if ([self isAppn:b]) {
 			[dict setObject:@"Application Extension" forKey:[NSNumber numberWithInt:b]];
+			NSLog(@"%i\t%@\n", b, @"Appn");
 			b += [self appnSize:b];
 		} else if ([self isComment:b]) {
 			[dict setObject:@"Comment Extension" forKey:[NSNumber numberWithInt:b]];
+			NSLog(@"%i\t%@\n", b, @"Comment");
 			b += [self commentSize:b];
 		} else if ([self isPlainText:b]) {
 			[dict setObject:@"Plain Text Extension" forKey:[NSNumber numberWithInt:b]];
+			NSLog(@"%i\t%@\n", b, @"Plain Text");
 			b += [self plainTextSize:b];			
 		} else if ([self isTrailer:b]) {
 			[dict setObject:@"Trailer" forKey:[NSNumber numberWithInt:b]];	
+			NSLog(@"%i\t%@\n", b, @"Trailer");
 			break;
 		} else {
 			[dict setObject:@"Unknown" forKey:[NSNumber numberWithInt:b]];	
+			NSLog(@"%i\t%@\n", b, @"Unknown");
 			b += 1;
 		}
 	}	
@@ -165,15 +173,15 @@
 		return NO;
 	}
 	int b0 = (int)[self extractSingleByte:byteNum];
-	short imgX = [self extractShort:byteNum+5];
-	short imgY = [self extractShort:byteNum+7];
 	short imgX0 = [self extractShort:byteNum+1];
 	short imgY0 = [self extractShort:byteNum+3];	
+	short imgX = [self extractShort:byteNum+5];
+	short imgY = [self extractShort:byteNum+7];
 	if (b0 == 44 &&
-		imgX <= self.width &&
-		imgY <= self.height &&
 		imgX0 <= self.width &&
-		imgY0 <= self.height) {
+		imgY0 <= self.height &&
+		imgX <= self.width &&
+		imgY <= self.height) {
 		return YES;
 	} else {
 		return NO;
@@ -306,14 +314,15 @@
 -(NSMutableArray*)makePNGs {
 	
 	NSMutableArray *pngs = [NSMutableArray arrayWithCapacity:4];
-
+	
 	// header is header
 	NSRange headerRange = {0, [self headerSize:0]};
-	NSData *header = [contents subdataWithRange:headerRange];		
+	NSData *header = [contents subdataWithRange:headerRange];
+	
 	// trailer is ';'
 	NSRange trailerRange = {[contents length]-1, 1};
 	NSData *trailer = [contents subdataWithRange:trailerRange];
-		
+	
 	bool addToArray= NO;
 	int i = 0;
 	NSNumber *byteIndex, *byteIndex1;
@@ -369,7 +378,7 @@
 }
 
 -(BOOL)writePNGs:(NSMutableArray*)array inFolder:(NSString *)folder withName:(NSString *)name {
-		
+	
 	bool successFlag = NO;
 	uint i;
 	for (i = 0; i < [array count]; i++) {

@@ -55,6 +55,13 @@
 	STAssertTrue([honey isTrailer:114695], @"Trailer at 114695");
 	
 	STAssertTrue([honey isAnimated], @"Animated?");
+	
+	STAssertTrue([newton isGCE:97147], @"GCE at 97147");
+	STAssertTrue([newton isImage:97155], @"Image at 97147");
+	
+	STAssertTrue([newton isGCE:106015], @"GCE at 106015");
+	STAssertTrue([newton isImage:106023], @"GCE at 106023");
+		
 }
 
 -(void)testSizes {
@@ -66,6 +73,8 @@
 	STAssertEquals(26999, [honey imageSize:30715], @"Image 1 size is 26999");
 	STAssertEquals(23745, [honey imageSize:57722], @"Image 2 size is 23745");
 	STAssertEquals(33220, [honey imageSize:81475], @"Image 3 size is 33220");
+	
+	STAssertEquals(8860, [newton imageSize:97155], @"Image in Newton");
 }
 
 -(void)testIndexer {
