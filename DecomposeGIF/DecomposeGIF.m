@@ -114,12 +114,6 @@
 	return [byteIndex intValue];
 }
 
--(BOOL)writeDataToPNG:(NSData *)data toFile:(NSString*)name {
-	UIImage *img = [UIImage imageWithData:data];	
-	NSData *data1 = [NSData dataWithData:UIImagePNGRepresentation(img)];
-	return [data1 writeToFile:name atomically:YES];
-}
-
 // predicates
 
 -(BOOL)isGIF {
@@ -311,30 +305,17 @@
 
 -(NSMutableArray*)makePNGs {
 	
-	// header is header
-	NSRange headerRange = {0, [self headerSize:0]};
-	NSData *header = [contents subdataWithRange:headerRange];		
-	// trailer is ';'
-	NSRange trailerRange = {[contents length]-1, 1};
-	NSData *trailer = [contents subdataWithRange:trailerRange];
-	
-	return nil;
-}
+	NSMutableArray *pngs = [NSMutableArray arrayWithCapacity:4];
 
--(BOOL)writePNGs:(NSString*)inDir withName:(NSString*)name;{
-	
-	BOOL didItWork;
-	BOOL shouldWrite = NO;
-	
 	// header is header
 	NSRange headerRange = {0, [self headerSize:0]};
 	NSData *header = [contents subdataWithRange:headerRange];		
 	// trailer is ';'
 	NSRange trailerRange = {[contents length]-1, 1};
 	NSData *trailer = [contents subdataWithRange:trailerRange];
-	
+		
+	bool addToArray= NO;
 	int i = 0;
-	int count = 0;
 	NSNumber *byteIndex, *byteIndex1;
 	
 	while (i < [self.sortedKeys count]-1) {
@@ -349,12 +330,11 @@
 			while (YES) {
 				if (i+1 >= [self.sortedKeys count]) {
 					NSLog(@"makePNGs: Corrupted GIF file!");
-					return NO;
 				}
 				nextIndex = [self.sortedKeys objectAtIndex:i];
 				if ([[self.blockPositions objectForKey:nextIndex] isEqualToString:@"Image Descriptor"]) {
 					byteIndex1 = [self.sortedKeys objectAtIndex:i+1];
-					shouldWrite = YES;
+					addToArray = YES;
 					break;
 				} else {
 					i += 1;
@@ -364,11 +344,10 @@
 		
 		if ([blk isEqualToString:@"Image Descriptor"]) {			
 			byteIndex1 = [self.sortedKeys objectAtIndex:i+1];
-			shouldWrite = YES;
-		} 
-
+			addToArray = YES;
+		} 		
 		
-		if (shouldWrite) {
+		if (addToArray) {
 			int i0 = [byteIndex intValue];
 			int i1 = [byteIndex1 intValue];
 			NSRange imgRange = {i0, i1-i0};
@@ -377,23 +356,37 @@
 			[output appendData:img];
 			[output appendData:trailer];
 			
-			NSString *fileName = [NSString stringWithFormat:@"%@-%i",name,count];
-			NSString *extension = @"png";
-			NSString *fullPath = [inDir stringByAppendingPathComponent:fileName];
-			fullPath = [fullPath stringByAppendingPathExtension:extension];
-			
-			didItWork = [self writeDataToPNG:output toFile:fullPath];
-			count += 1;
-			if (!didItWork) {
-				return NO;
-			}
+			UIImage *uiImg = [UIImage imageWithData:output];	
+			NSData *pngImg = [NSData dataWithData:UIImagePNGRepresentation(uiImg)];
+			[pngs addObject:pngImg];			
 		}
 		
 		i += 1;
-		shouldWrite = NO;
+		addToArray = NO;
 	}
 	
-	return didItWork;
+	return pngs;
+}
+
+-(BOOL)writePNGs:(NSString *)folder withName:(NSString *)name {
+	
+	NSMutableArray *array = [self makePNGs];
+	
+	bool successFlag = NO;
+	uint i;
+	for (i = 0; i < [array count]; i++) {
+		NSString *fileName = [NSString stringWithFormat:@"%@-%i", name, i];
+		NSString *extension = @"png";
+		NSString *fullPath = [folder stringByAppendingPathComponent:fileName];
+		fullPath = [fullPath stringByAppendingPathExtension:extension];
+		NSData * data = [array objectAtIndex:i];
+		successFlag = [data writeToFile:fullPath atomically:YES];
+		if (!successFlag) {
+			NSLog(@"Image %i not written to file", i);
+			break;
+		}
+	}	
+	return successFlag;
 }
 
 

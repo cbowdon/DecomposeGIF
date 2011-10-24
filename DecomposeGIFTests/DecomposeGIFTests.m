@@ -92,9 +92,12 @@
 -(void)testWritePNGs {
 	
 	// Should check that all the right PNG files were made
+	
+		
 	NSString *testDir = @"/Users/chris/Desktop/";
 	NSFileManager *fileMan = [NSFileManager defaultManager];
 	
+	// Check the convenient method
 	STAssertTrue([honey writePNGs:testDir withName:@"test"], @"Did it work?");
 	
 	NSPredicate *pngFilter = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] %@", @".png"];
@@ -108,9 +111,10 @@
 		STAssertTrue([[output objectAtIndex:i] isEqualToString:fileName], @"Right filename/number");
 		[fileMan removeItemAtPath:[testDir stringByAppendingString:[output objectAtIndex:i]] error:nil];
 	}
+
 	
 	// test transparency
-	[newton writePNGs:testDir withName:@"newton"];
+//	[newton writePNGs:testDir withName:@"newton"];
 	
 }
 
